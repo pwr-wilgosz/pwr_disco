@@ -9,6 +9,8 @@
 #ifndef __pwrdisco__classes__
 #define __pwrdisco__classes__
 
-#include "point.h"
+#include "girl.h"
 #include "parquet.h"
+#include "point.h"
+
 #endif /* defined(__pwrdisco__classes__) */
