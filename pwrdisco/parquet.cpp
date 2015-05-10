@@ -11,20 +11,23 @@
 
 
 Parquet::Parquet(Point point, int base_width, int base_height){
-    top_left = new Point(point.x, point.y);
+    top_left = Point(point.getX(), point.getY());
     width = base_width;
     height = base_height;
+    for(int i = 0; i < 4;
+        i++)
+        corners[i] = new Point();
 }
 
 void Parquet::draw(pthread_mutex_t *screenMutex){
-    for(int i = top_left->x; i < top_left->x+width; i++){
-        print(screenMutex, i, top_left->y, "-");
-        print(screenMutex, i, top_left->y+height, "-");
+    for(int i = top_left.getX(); i < top_left.getX()+width; i++){
+        print(screenMutex, i, top_left.getY(), "-");
+        print(screenMutex, i, top_left.getY()+height, "-");
     }
     
-    for(int i = top_left->y+1; i < top_left->y+height; i++){
-        print(screenMutex, top_left->x, i, "|");
-        print(screenMutex, top_left->x+width, i, "|");
+    for(int i = top_left.getY()+1; i < top_left.getY()+height; i++){
+        print(screenMutex, top_left.getX(), i, "|");
+        print(screenMutex, top_left.getX()+width, i, "|");
     }
 
 }

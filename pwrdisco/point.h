@@ -12,9 +12,12 @@
 #include <stdio.h>
 
 class Point{
-public:
     int x, y;
+public:
+    Point(){ x=0;y=0; }
     Point(int xpos, int ypos);
+    int getX(){ return x; }
+    int getY(){ return y; }
 };
 
 #endif /* defined(__pwrdisco__point__) */
