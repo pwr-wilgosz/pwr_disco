@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9E2FD3231AFF237300CECEBF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD3221AFF237300CECEBF /* main.cpp */; };
+		9E2FD32D1AFF23B700CECEBF /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD32B1AFF23B700CECEBF /* point.cpp */; };
+		9E2FD3301AFF256D00CECEBF /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD32E1AFF256D00CECEBF /* functions.cpp */; };
+		9E2FD3381AFF27F000CECEBF /* parquet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD3361AFF27F000CECEBF /* parquet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,14 @@
 /* Begin PBXFileReference section */
 		9E2FD31F1AFF237300CECEBF /* pwrdisco */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pwrdisco; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E2FD3221AFF237300CECEBF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9E2FD32B1AFF23B700CECEBF /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; };
+		9E2FD32C1AFF23B700CECEBF /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = point.h; sourceTree = "<group>"; };
+		9E2FD32E1AFF256D00CECEBF /* functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = functions.cpp; sourceTree = "<group>"; };
+		9E2FD32F1AFF256D00CECEBF /* functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = functions.h; sourceTree = "<group>"; };
+		9E2FD3321AFF257500CECEBF /* classes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = classes.h; sourceTree = "<group>"; };
+		9E2FD3341AFF25FF00CECEBF /* headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
+		9E2FD3361AFF27F000CECEBF /* parquet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parquet.cpp; sourceTree = "<group>"; };
+		9E2FD3371AFF27F000CECEBF /* parquet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parquet.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +69,32 @@
 			isa = PBXGroup;
 			children = (
 				9E2FD3221AFF237300CECEBF /* main.cpp */,
+				9E2FD3291AFF239500CECEBF /* lib */,
 			);
 			path = pwrdisco;
+			sourceTree = "<group>";
+		};
+		9E2FD3291AFF239500CECEBF /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				9E2FD32A1AFF23A300CECEBF /* classes */,
+				9E2FD32E1AFF256D00CECEBF /* functions.cpp */,
+				9E2FD32F1AFF256D00CECEBF /* functions.h */,
+				9E2FD3341AFF25FF00CECEBF /* headers.h */,
+				9E2FD3321AFF257500CECEBF /* classes.h */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		9E2FD32A1AFF23A300CECEBF /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				9E2FD32B1AFF23B700CECEBF /* point.cpp */,
+				9E2FD3361AFF27F000CECEBF /* parquet.cpp */,
+				9E2FD3371AFF27F000CECEBF /* parquet.h */,
+				9E2FD32C1AFF23B700CECEBF /* point.h */,
+			);
+			name = classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E2FD32D1AFF23B700CECEBF /* point.cpp in Sources */,
+				9E2FD3301AFF256D00CECEBF /* functions.cpp in Sources */,
+				9E2FD3381AFF27F000CECEBF /* parquet.cpp in Sources */,
 				9E2FD3231AFF237300CECEBF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
