@@ -19,10 +19,18 @@ int main(int argc, const char * argv[]) {
 
     Girl* girls[GIRLS_COUNT];
     for (int i = 0; i < GIRLS_COUNT; i++) {
-        girls[i] = new Girl(i+1, parquet);
-        girls[i]->drawPosition(&screenMutex, parquet);
-//        printf("%d %d", girls[i]->getPosition().getX(), girls[i]->getPosition().getY());
+        girls[i] = new Girl(i+1, parquet, &screenMutex);
     }
+    sleep(1);
+    for (int i = 0; i < GIRLS_COUNT; i++) {
+        Point current_pos(girls[i]->getPosition().getX()-1, girls[i]->getPosition().getY());
+        girls[i]->drawNewPosition(&screenMutex, parquet, current_pos);
+    }
+    
+
+    //    xy(current.getX(), current.getY()), vprintf(fmt, ap);
+    //    xy(current.getX()+1, current.getY()), fflush(stdout);
+
     
 //    pthread_t boys[BOYS_COUNT];
 //    
@@ -34,6 +42,6 @@ int main(int argc, const char * argv[]) {
 //    for(int i = 0; i < BOYS_COUNT; i++)
 //     	pthread_join(boys[i], NULL);
 //    
-    printf ("Sorry, disco is ended. Goodnight!\n");
+//    printf ("Sorry, disco is ended. Goodnight!\n");
     return 0;
 }

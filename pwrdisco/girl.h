@@ -20,10 +20,10 @@ class Girl{
     Point *maxPos;
 public:
     Girl();
-    Girl(int girl_id, Parquet parquet);
+    Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex);
     int getId(){ return id; }
     Point getPosition(){ return *position; }
-    void drawPosition(pthread_mutex_t *screenMutex, Parquet parquet);
+    void drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position);
 
 };
 

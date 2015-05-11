@@ -15,6 +15,6 @@
 
 void *enjoy(void *param);
 void print(pthread_mutex_t *screenMutex, int y, int x, const char *fmt, ...);
-
+void clearChar(pthread_mutex_t *screenMutex, int x, int y, const char *fmt, ...);
 
 #endif /* defined(__pwrdisco__functions__) */

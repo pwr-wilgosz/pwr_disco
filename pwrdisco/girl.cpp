@@ -10,19 +10,22 @@
 #include "girl.h"
 #include "functions.h"
 
-Girl::Girl(int girl_id, Parquet parquet){
-    
-    id = girl_id;
-//    printf("corner0: %d %d\n", parquet.corner(0).getX(), parquet.corner(0).getY());
-//    printf("corner1: %d %d\n", parquet.corner(1).getX(), parquet.corner(1).getY());
-//    printf("corner2: %d %d\n", parquet.corner(2).getX(), parquet.corner(2).getY());
-//    printf("corner2: %d %d\n", parquet.corner(3).getX(), parquet.corner(3).getY());
-    minPos = new Point(parquet.corner(0).getX()+1, parquet.corner(0).getY()+1);
-    maxPos = new Point(parquet.corner(2).getX()-1, parquet.corner(2).getY()-1);
+Girl::Girl(){
+    minPos = new Point();
+    maxPos = new Point();
     position = new Point(maxPos->getX(), minPos->getY()+id);
 }
-
-void Girl::drawPosition(pthread_mutex_t *screenMutex, Parquet parquet){
+Girl::Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex){
+    
+    id = girl_id;
+    minPos = new Point(parquet.corner(0).getX()+2, parquet.corner(0).getY()+1);
+    maxPos = new Point(parquet.corner(2).getX()-2, parquet.corner(2).getY()-1);
+    position = new Point(maxPos->getX(), minPos->getY()+id);
+    
     print(screenMutex, position->getX(), position->getY(), "D");
 }
 
+void Girl::drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position){
+    print(screenMutex, current_position.getX(), current_position.getY(), "D");
+    clearChar(screenMutex, position->getX(), position->getY(), " ");
+}

@@ -20,15 +20,10 @@
 #include "functions.h"
 #include "classes.h"
 
-#define GIRLS_COUNT 10
+#define GIRLS_COUNT 2
 #define BOYS_COUNT 2
 #define xy(x, y) printf("\033[%d;%dH", x, y)
-#define clear_eol(x) print(x, 14, "\033[K")
-
-//class Boy {
-//    int *girl_list;
-//public:
-//};
+#define clear_eol(x, y) printf("\033[%d;%d", x-2, y)
 
 
 #endif
