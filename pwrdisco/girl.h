@@ -18,10 +18,14 @@ class Girl{
     Point *position;
     Point *minPos;
     Point *maxPos;
+    bool busy;
 public:
     Girl();
     Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex);
     int getId(){ return id; }
+    int isBusy(){ return busy; }
+    void busyHer(){ busy = true; }
+    void freeHer() {busy = false; }
     Point getPosition(){ return *position; }
     void drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position);
 

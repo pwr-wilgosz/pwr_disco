@@ -11,12 +11,13 @@
 #include "functions.h"
 
 Girl::Girl(){
+    busy = false;
     minPos = new Point();
     maxPos = new Point();
     position = new Point(maxPos->getX(), minPos->getY()+id);
 }
 Girl::Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex){
-    
+    busy = false;
     id = girl_id;
     minPos = new Point(parquet.corner(0).getX()+2, parquet.corner(0).getY()+1);
     maxPos = new Point(parquet.corner(2).getX()-2, parquet.corner(2).getY()-1);

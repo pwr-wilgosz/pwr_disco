@@ -9,6 +9,10 @@
 #ifndef pwrdisco_headers_h
 #define pwrdisco_headers_h
 
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 #include <iostream>
 #include <sys/sem.h>
 #include <pthread.h>
@@ -23,7 +27,5 @@
 #define GIRLS_COUNT 2
 #define BOYS_COUNT 2
 #define xy(x, y) printf("\033[%d;%dH", x, y)
-#define clear_eol(x, y) printf("\033[%d;%d", x-2, y)
-
 
 #endif

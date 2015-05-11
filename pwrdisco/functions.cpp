@@ -8,14 +8,6 @@
 #include "headers.h"
 #include "functions.h"
 
-void *enjoy(void *param){
-    int *i = (int*)param;
-    printf("%d\n", *i);
-    
-    return NULL;
-}
-
-
 void print(pthread_mutex_t *screenMutex, int y, int x, const char *fmt, ...){
     va_list ap;
     va_start(ap, fmt);
