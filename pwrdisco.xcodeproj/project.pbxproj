@@ -11,6 +11,7 @@
 		9E2FD32D1AFF23B700CECEBF /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD32B1AFF23B700CECEBF /* point.cpp */; };
 		9E2FD3301AFF256D00CECEBF /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD32E1AFF256D00CECEBF /* functions.cpp */; };
 		9E2FD3381AFF27F000CECEBF /* parquet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD3361AFF27F000CECEBF /* parquet.cpp */; };
+		9E2FD33E1B00126700CECEBF /* girl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E2FD33C1B00126700CECEBF /* girl.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,8 @@
 		9E2FD3341AFF25FF00CECEBF /* headers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = headers.h; sourceTree = "<group>"; };
 		9E2FD3361AFF27F000CECEBF /* parquet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parquet.cpp; sourceTree = "<group>"; };
 		9E2FD3371AFF27F000CECEBF /* parquet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parquet.h; sourceTree = "<group>"; };
+		9E2FD33C1B00126700CECEBF /* girl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = girl.cpp; sourceTree = "<group>"; };
+		9E2FD33D1B00126700CECEBF /* girl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = girl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				9E2FD32B1AFF23B700CECEBF /* point.cpp */,
+				9E2FD33C1B00126700CECEBF /* girl.cpp */,
+				9E2FD33D1B00126700CECEBF /* girl.h */,
 				9E2FD3361AFF27F000CECEBF /* parquet.cpp */,
 				9E2FD3371AFF27F000CECEBF /* parquet.h */,
 				9E2FD32C1AFF23B700CECEBF /* point.h */,
@@ -156,6 +161,7 @@
 				9E2FD32D1AFF23B700CECEBF /* point.cpp in Sources */,
 				9E2FD3301AFF256D00CECEBF /* functions.cpp in Sources */,
 				9E2FD3381AFF27F000CECEBF /* parquet.cpp in Sources */,
+				9E2FD33E1B00126700CECEBF /* girl.cpp in Sources */,
 				9E2FD3231AFF237300CECEBF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +279,7 @@
 				9E2FD3281AFF237300CECEBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

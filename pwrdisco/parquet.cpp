@@ -14,9 +14,11 @@ Parquet::Parquet(Point point, int base_width, int base_height){
     top_left = Point(point.getX(), point.getY());
     width = base_width;
     height = base_height;
-    for(int i = 0; i < 4;
-        i++)
-        corners[i] = new Point();
+
+    corners[0] = &top_left;
+    corners[1] = new Point(top_left.getX()+width, top_left.getY());
+    corners[2] = new Point(top_left.getX()+width, top_left.getY()+height);
+    corners[3] = new Point(top_left.getX(), top_left.getY()+height);
 }
 
 void Parquet::draw(pthread_mutex_t *screenMutex){

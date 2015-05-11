@@ -10,7 +10,7 @@
 #define __pwrdisco__classes__
 
 #include "girl.h"
-#include "parquet.h"
 #include "point.h"
+#include "parquet.h"
 
 #endif /* defined(__pwrdisco__classes__) */

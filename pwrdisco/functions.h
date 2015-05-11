@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 #include <pthread.h>
+#include "girl.h"
 
-void initialize_girls(int *);
 void *enjoy(void *param);
 void print(pthread_mutex_t *screenMutex, int y, int x, const char *fmt, ...);
 

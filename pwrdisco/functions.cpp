@@ -8,11 +8,6 @@
 #include "headers.h"
 #include "functions.h"
 
-void initialize_girls(int *girls){
-    for(int i = 0; i < GIRLS_COUNT; ++i)
-        girls[i] = i;
-}
-
 void *enjoy(void *param){
     int *i = (int*)param;
     printf("%d\n", *i);

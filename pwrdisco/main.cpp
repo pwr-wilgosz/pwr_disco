@@ -7,27 +7,33 @@
 //
 
 #include "headers.h"
+#include "girl.h"
 
- int girls[GIRLS_COUNT];
- pthread_mutex_t screenMutex;
+pthread_mutex_t screenMutex;
 
 int main(int argc, const char * argv[]) {
     pthread_mutex_init(&screenMutex,0);
-    initialize_girls(girls);
     Point p( 30, 3);
     Parquet parquet(p, 130, 40);
     parquet.draw(&screenMutex);
-    
-    pthread_t boys[BOYS_COUNT];
-    
-    for(int i = 0; i < BOYS_COUNT; i++){
-        sleep(1);
-     	pthread_create(&boys[i], NULL, enjoy, &i);
+
+    Girl* girls[GIRLS_COUNT];
+    for (int i = 0; i < GIRLS_COUNT; i++) {
+        girls[i] = new Girl(i+1, parquet);
+        girls[i]->drawPosition(&screenMutex, parquet);
+//        printf("%d %d", girls[i]->getPosition().getX(), girls[i]->getPosition().getY());
     }
     
-    for(int i = 0; i < BOYS_COUNT; i++)
-     	pthread_join(boys[i], NULL);
-    
+//    pthread_t boys[BOYS_COUNT];
+//    
+//    for(int i = 0; i < BOYS_COUNT; i++){
+//        sleep(1);
+//     	pthread_create(&boys[i], NULL, enjoy, &i);
+//    }
+//    
+//    for(int i = 0; i < BOYS_COUNT; i++)
+//     	pthread_join(boys[i], NULL);
+//    
     printf ("Sorry, disco is ended. Goodnight!\n");
     return 0;
 }

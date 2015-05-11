@@ -20,14 +20,11 @@
 #include "functions.h"
 #include "classes.h"
 
-#define GIRLS_COUNT 1
+#define GIRLS_COUNT 10
 #define BOYS_COUNT 2
 #define xy(x, y) printf("\033[%d;%dH", x, y)
 #define clear_eol(x) print(x, 14, "\033[K")
 
-struct Girl{
-    int x, y, id;
-};
 //class Boy {
 //    int *girl_list;
 //public:
