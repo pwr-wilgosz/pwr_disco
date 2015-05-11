@@ -15,17 +15,17 @@
 
 #include <iostream>
 #include <sys/sem.h>
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <thread>
 #include <unistd.h>
 #include <stdarg.h>
 
 #include "functions.h"
 #include "classes.h"
 
-#define GIRLS_COUNT 2
-#define BOYS_COUNT 2
+#define GIRLS_COUNT 10
+#define BOYS_COUNT 10
 #define xy(x, y) printf("\033[%d;%dH", x, y)
+
+using namespace std;
 
 #endif

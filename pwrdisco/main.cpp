@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
 
     Girl* girls[GIRLS_COUNT];
     for (int i = 0; i < GIRLS_COUNT; i++)
-        girls[i] = new Girl(i+1, parquet, &screenMutex);
+        girls[i] = new Girl(i, parquet, &screenMutex);
 
     for (int i = 0; i < GIRLS_COUNT; i++){
         Point current_pos(girls[i]->getPosition().getX()-1, girls[i]->getPosition().getY());
@@ -36,14 +36,13 @@ int main(int argc, const char * argv[]) {
         boys[i] = new Boy(parquet, &screenMutex, girls, i);
     }
 
-    for(int i = 0; i < BOYS_COUNT; i++){
-        // creating new threads in constructor
-        boys[i]->createThread(i);
-    }
-
-    
     for(int i = 0; i < BOYS_COUNT; i++)
-     	pthread_join(boys[i]->thread_handler, NULL);
+        // creating new threads in constructor
+        boys[i]->startThread();
+
+    for(int i = 0; i < BOYS_COUNT; i++)
+        boys[i]->joinThread();
+
     
 //    printf ("Sorry, disco is ended. Goodnight!\n");
     

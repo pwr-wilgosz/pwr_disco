@@ -9,9 +9,8 @@
 #ifndef __pwrdisco__boy__
 #define __pwrdisco__boy__
 
-#include <pthread.h>
 #include <list>
-#include <iostream>
+#include <thread>
 #include <cstddef>
 #include "headers.h"
 #include "parquet.h"
@@ -23,16 +22,19 @@ class Boy{
     Point *position;
     Point *minPos;
     Point *maxPos;
-    list<Girl*> girl_list;
-    
+    list<int> girlIds;
+    thread _th;
+    Girl **girls;
 public:
     Boy();
     Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index);
+    ~Boy() { if (_th.joinable()) _th.join(); }
+    
     Point getPosition(){ return *position; }
     void drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position);
-    void createThread(int i);
-    pthread_t thread_handler;
-    static void *enjoy(void*);
+    void startThread() { _th = thread(&Boy::enjoy, this); }
+    void joinThread() { _th.join(); }
+    void enjoy();
 //    ask to dance
 //    dance
 };
