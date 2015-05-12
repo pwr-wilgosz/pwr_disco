@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 Sebastian Wilgosz. All rights reserved.
 //
 
+#include "headers.h"
 #include "parquet.h"
 #include "girl.h"
 #include "functions.h"
 
+using namespace std;
 Girl::Girl(){
     busy = false;
     minPos = new Point();
@@ -22,7 +24,11 @@ Girl::Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex){
     minPos = new Point(parquet.corner(0).getX()+2, parquet.corner(0).getY()+1);
     maxPos = new Point(parquet.corner(2).getX()-2, parquet.corner(2).getY()-1);
     position = new Point(maxPos->getX(), minPos->getY()+id);
-    
+
+//    std::string s = std::to_string(getId());
+//    char const *pchar = s.c_str();  //use char const* as target type
+//                print(screenMutex, position->getX(), position->getY(), pchar);
+
     print(screenMutex, position->getX(), position->getY(), "D");
 }
 

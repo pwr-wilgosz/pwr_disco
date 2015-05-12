@@ -25,6 +25,10 @@ class Boy{
     list<int> girlIds;
     thread _th;
     Girl **girls;
+    string actions[2] = {"dance", "wc"};
+    int activeAction;
+    pthread_mutex_t* screenMutex;
+
 public:
     Boy();
     Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index);
@@ -35,6 +39,14 @@ public:
     void startThread() { _th = thread(&Boy::enjoy, this); }
     void joinThread() { _th.join(); }
     void enjoy();
+    void chooseAction() { activeAction = rand() % 2; }
+    string currentAction(){ return actions[activeAction];}
+    void move(Girl target);
+    void moveRight();
+    void moveLeft();
+    void moveUp();
+    void moveDown();
+
 //    ask to dance
 //    dance
 };

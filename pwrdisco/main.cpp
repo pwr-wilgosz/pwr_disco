@@ -36,10 +36,12 @@ int main(int argc, const char * argv[]) {
         boys[i] = new Boy(parquet, &screenMutex, girls, i);
     }
 
-    for(int i = 0; i < BOYS_COUNT; i++)
+    for(int i = 0; i < BOYS_COUNT; i++){
         // creating new threads in constructor
+        usleep(rand() % 100000 + 10000);
         boys[i]->startThread();
-
+    }
+    
     for(int i = 0; i < BOYS_COUNT; i++)
         boys[i]->joinThread();
 

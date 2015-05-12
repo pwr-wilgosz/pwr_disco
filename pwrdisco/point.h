@@ -18,6 +18,11 @@ public:
     Point(int xpos, int ypos);
     int getX(){ return x; }
     int getY(){ return y; }
+    void incX(){ x++; }
+    void incY(){ y++; }
+    void decX(){ x--; }
+    void decY(){ y--; }
+    
 };
 
 #endif /* defined(__pwrdisco__point__) */
