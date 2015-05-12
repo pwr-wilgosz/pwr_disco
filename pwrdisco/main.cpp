@@ -20,6 +20,8 @@ int main(int argc, const char * argv[]) {
     Point p( 30, 3);
     Parquet parquet(p, 130, 40);
     parquet.draw(&screenMutex);
+    Wc *wc = new Wc();
+    wc->draw(&screenMutex);
 
     Girl* girls[GIRLS_COUNT];
     for (int i = 0; i < GIRLS_COUNT; i++)
@@ -33,7 +35,7 @@ int main(int argc, const char * argv[]) {
     Boy *boys[BOYS_COUNT];
     for(int i = 0; i < BOYS_COUNT; i++){
         // creating new threads in constructor
-        boys[i] = new Boy(parquet, &screenMutex, girls, i);
+        boys[i] = new Boy(parquet, &screenMutex, girls, i, wc);
     }
 
     for(int i = 0; i < BOYS_COUNT; i++){
@@ -41,7 +43,7 @@ int main(int argc, const char * argv[]) {
         usleep(rand() % 100000 + 10000);
         boys[i]->startThread();
     }
-    
+
     for(int i = 0; i < BOYS_COUNT; i++)
         boys[i]->joinThread();
 

@@ -13,9 +13,7 @@
 #include <thread>
 #include <cstddef>
 #include "headers.h"
-#include "parquet.h"
-#include "girl.h"
-
+#include "wc.h"
 using namespace std;
 
 class Boy{
@@ -28,10 +26,11 @@ class Boy{
     string actions[2] = {"dance", "wc"};
     int activeAction;
     pthread_mutex_t* screenMutex;
+    Wc *wc;
 
 public:
     Boy();
-    Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index);
+    Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index, Wc* wwc);
     ~Boy() { if (_th.joinable()) _th.join(); }
     
     Point getPosition(){ return *position; }

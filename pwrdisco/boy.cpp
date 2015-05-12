@@ -21,13 +21,13 @@ Boy::Boy(){
     maxPos = new Point();
     position = new Point(maxPos->getX(), minPos->getY());
 }
-Boy::Boy(Parquet parquet, pthread_mutex_t *screenMtx, Girl ** list, int index){
+Boy::Boy(Parquet parquet, pthread_mutex_t *screenMtx, Girl ** list, int index, Wc* wwc){
     minPos = new Point(parquet.corner(0).getX()+4, parquet.corner(0).getY()+2);
     maxPos = new Point(parquet.corner(2).getX()-6, parquet.corner(2).getY()-2);
     
     position = new Point(minPos->getX()+10-(index/(parquet.getHeight()-4)), minPos->getY() + index%(parquet.getHeight()-4));
     girls = list;
-    
+    wc = wwc;
     screenMutex = screenMtx;
 
     // initialize girl list
@@ -151,6 +151,22 @@ void Boy::moveDown(){
 }
 
 void Boy::gotoWC(){
-//    Point p(0,0);
-//    move(p);
+    Point p(minPos->getX(),minPos->getY()+4);
+    move(p);
+    p.setX(2);
+    p.setY(wc->getPosition().getY()+6);
+    move(p);
+    
+    if (!wc->isBusy()){
+        wc->busyIt();
+        p.setY(wc->getPosition().getY()+2);
+        move(p);
+        print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), "!");
+        usleep(rand()% 10000000 +100000);
+        print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), " ");
+        wc->freeIt();
+        p.setY(wc->getPosition().getY()+6);
+        move(p);
+    }
+    
 }
