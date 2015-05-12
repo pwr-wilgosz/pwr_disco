@@ -22,8 +22,8 @@
 #include "functions.h"
 #include "classes.h"
 
-#define GIRLS_COUNT 10
-#define BOYS_COUNT 10
+#define GIRLS_COUNT 100
+#define BOYS_COUNT 500
 
 #define xy(x, y) printf("\033[%d;%dH", x, y)
 

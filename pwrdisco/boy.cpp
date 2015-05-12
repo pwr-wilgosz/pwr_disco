@@ -1,3 +1,8 @@
+//            std::string s = std::to_string(targetGirl.getId());
+//            char const *pchar = s.c_str();  //use char const* as target type
+//            print(screenMutex, position->getX(), position->getY(), pchar);
+
+
 //
 //  boy.cpp
 //  pwrdisco
@@ -6,29 +11,29 @@
 //  Copyright (c) 2015 Sebastian Wilgosz. All rights reserved.
 //
 
+
 #include "boy.h"
 #include "functions.h"
-
+#define movespeed rand() % 100000 + 50000
+#define dancespeed rand() % 1000000 + 100000
 Boy::Boy(){
     minPos = new Point();
     maxPos = new Point();
     position = new Point(maxPos->getX(), minPos->getY());
 }
 Boy::Boy(Parquet parquet, pthread_mutex_t *screenMtx, Girl ** list, int index){
-    minPos = new Point(parquet.corner(0).getX()+2, parquet.corner(0).getY()+2);
-    maxPos = new Point(parquet.corner(2).getX()-2, parquet.corner(2).getY()-2);
-    position = new Point(minPos->getX(), minPos->getY() + index);
+    minPos = new Point(parquet.corner(0).getX()+4, parquet.corner(0).getY()+2);
+    maxPos = new Point(parquet.corner(2).getX()-6, parquet.corner(2).getY()-2);
+    
+    position = new Point(minPos->getX()+10-(index/(parquet.getHeight()-4)), minPos->getY() + index%(parquet.getHeight()-4));
     girls = list;
+    
     screenMutex = screenMtx;
 
     // initialize girl list
     for (int i = 0; i < GIRLS_COUNT; i++) {
         int girl_number = rand() % GIRLS_COUNT;
         girlIds.push_back(list[girl_number]->getId());
-        
-//        std::string s = std::to_string(list[girl_number]->getId());
-//        char const *pchar = s.c_str();  //use char const* as target type
-
     }
     print(screenMutex, position->getX(), position->getY(), "B");
 }
@@ -40,48 +45,82 @@ void Boy::drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point c
 }
 
 void Boy::enjoy(){
-    for( list<int>::iterator iter=girlIds.begin(); iter != girlIds.end(); iter++ ){
-        chooseAction();
-        girlIds.begin();
-        Girl *girl;
-        if (currentAction() == "dance"){
-            girl = girls[*iter];
-            move(*girl);
-            if (!girl->isBusy()){
-//                dance(&girl);
+    while (!girlIds.empty()){
+        for( list<int>::iterator iter=girlIds.begin(); ((iter != girlIds.end()) && !girlIds.empty()); iter++ ){
+            chooseAction();
+            Girl *girl;
+            if (currentAction() == "dance"){
+                girl = girls[*iter];
+                move(girl->getPosition());
+                if (!girl->isBusy()){
+                    dance(girl);
+                    girlIds.erase(iter);
+                }
+            }else if (currentAction() == "wc"){
+                gotoWC();
             }
         }
-//        cout << currentAction() << endl;
+        if (!girlIds.empty())
+            sleep(rand() % 10 + 5);
     }
 }
 
-void Boy::move(Girl targetGirl){
-    Point target = targetGirl.getPosition();
+void Boy::dance(Girl *girl){
+    girl->busyHer();
+    print(screenMutex, position->getX()+1, position->getY(), "=");
+    
+
+    int steps = rand() % 50 + 30;
+    for (int i = 0; i<steps; i++) {
+        short int changeX = rand() % 3-1;
+        short int changeY = rand() % 3-1;
+        //remember old position
+        int oldX = position->getX();
+        int oldY = position->getY();
+        
+        //random new position and check if after change pair is in parquet
+        if (position->getX()+changeX >= maxPos->getX() || position->getX()+changeX <= minPos->getX()){
+            changeX *= -1;
+        }
+        if (position->getY()+changeY >= maxPos->getY() || position->getY()+changeY <= minPos->getY()){
+            changeY *= -1;
+        }
+        position->randX(changeX);
+        position->randY(changeY);
+        girl->setPosition(position->getX()+2, position->getY());
+        clearChar(screenMutex, oldX, oldY, "   ");
+        print(screenMutex, position->getX(), position->getY(), "B=G");
+        usleep(dancespeed);
+    }
+    clearChar(screenMutex, position->getX(), position->getY(), "   ");
+    print(screenMutex, girl->getPosition().getX(), girl->getPosition().getY(), "G");
+
+    girl->freeHer();
+    
+}
+
+void Boy::move(Point target){
     if (target.getX()-2 > position->getX()){
         while(target.getX()-2 > position->getX()){
-            usleep(rand() % 100000 + 1000);
+            usleep(movespeed);
             moveRight();
         }
     }else if (target.getX()-2 < position->getX()){
         while(target.getX()-2 < position->getX()){
-            usleep(rand() % 100000 + 1000);
+            usleep(movespeed);
             moveLeft();
         }
     }
 
-    if (target.getY() > position->getY()){
-        while(target.getY() > position->getY()){
-//            cout << "tY: " << target.getY() << " pY: " << position->getY() << endl;
-            usleep(rand() % 100000 + 1000);
+    if (target.getY()-1 > position->getY()){
+        while(target.getY()-1 > position->getY()){
+            usleep(movespeed);
             moveDown();
         }
-    }else if (target.getY() < position->getY()){
-        while(target.getY() < position->getY()){
-            usleep(rand() % 100000 + 1000);
+    }else if (target.getY()+1 < position->getY()){
+        while(target.getY()+1 < position->getY()){
+            usleep(movespeed);
             moveUp();
-//            std::string s = std::to_string(targetGirl.getId());
-//            char const *pchar = s.c_str();  //use char const* as target type
-//            print(screenMutex, position->getX(), position->getY(), pchar);
         }
     }
 
@@ -109,4 +148,9 @@ void Boy::moveDown(){
     clearChar(screenMutex, position->getX(), position->getY(), " ");
     position->incY();
     print(screenMutex, position->getX(), position->getY(), "B");
+}
+
+void Boy::gotoWC(){
+//    Point p(0,0);
+//    move(p);
 }

@@ -41,12 +41,14 @@ public:
     void enjoy();
     void chooseAction() { activeAction = rand() % 2; }
     string currentAction(){ return actions[activeAction];}
-    void move(Girl target);
+    void move(Point target);
+    void gotoWC();
     void moveRight();
     void moveLeft();
     void moveUp();
     void moveDown();
 
+    void dance(Girl *girl);
 //    ask to dance
 //    dance
 };

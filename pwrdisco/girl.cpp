@@ -21,18 +21,16 @@ Girl::Girl(){
 Girl::Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex){
     busy = false;
     id = girl_id;
-    minPos = new Point(parquet.corner(0).getX()+2, parquet.corner(0).getY()+1);
-    maxPos = new Point(parquet.corner(2).getX()-2, parquet.corner(2).getY()-1);
-    position = new Point(maxPos->getX(), minPos->getY()+id);
+    minPos = new Point(parquet.corner(0).getX()+6, parquet.corner(0).getY()+2);
+    maxPos = new Point(parquet.corner(2).getX()-4, parquet.corner(2).getY()-2);
+//    position = new Point(maxPos->getX()-50, minPos->getY()+id);
+    position = new Point(maxPos->getX()-60-(id/(parquet.getHeight()-4)), minPos->getY() + 5 + id%(parquet.getHeight()-9));
+    girlMutex = new mutex;
 
-//    std::string s = std::to_string(getId());
-//    char const *pchar = s.c_str();  //use char const* as target type
-//                print(screenMutex, position->getX(), position->getY(), pchar);
-
-    print(screenMutex, position->getX(), position->getY(), "D");
+    print(screenMutex, position->getX(), position->getY(), "G");
 }
 
 void Girl::drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position){
-    print(screenMutex, current_position.getX(), current_position.getY(), "D");
+    print(screenMutex, current_position.getX(), current_position.getY(), "G");
     clearChar(screenMutex, position->getX(), position->getY(), " ");
 }

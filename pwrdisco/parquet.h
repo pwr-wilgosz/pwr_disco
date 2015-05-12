@@ -21,6 +21,8 @@ public:
     Parquet (Point top_left, int base_width, int base_height);
     void draw(pthread_mutex_t *screenMutex);
     Point corner(int i){ return *corners[i]; }
+    int getWidth(){ return width; }
+    int getHeight(){ return height; }
 };
 
 #endif /* defined(__pwrdisco__parquet__) */

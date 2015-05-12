@@ -12,8 +12,8 @@
 #include <stdio.h>
 
 class Point{
-    int x, y;
 public:
+    int x, y;
     Point(){ x=0;y=0; }
     Point(int xpos, int ypos);
     int getX(){ return x; }
@@ -22,6 +22,11 @@ public:
     void incY(){ y++; }
     void decX(){ x--; }
     void decY(){ y--; }
+    void randX(int diff){ x += diff; } //diff is in -1,0,1
+    void randY(int diff){ y += diff; } //diff is in -1,0,1
+    void setX(int xx){ x = xx; }
+    void setY(int yy){ y = yy; }
+
     
 };
 

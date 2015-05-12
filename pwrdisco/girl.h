@@ -10,8 +10,10 @@
 #define __pwrdisco__girl__
 
 #include <stdio.h>
-#include <pthread.h>
 #include "parquet.h"
+#include "mutex"
+
+using namespace std;
 
 class Girl{
     int id;
@@ -19,14 +21,22 @@ class Girl{
     Point *minPos;
     Point *maxPos;
     bool busy;
+
+    mutex* girlMutex;
 public:
     Girl();
     Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex);
     int getId(){ return id; }
     int isBusy(){ return busy; }
-    void busyHer(){ busy = true; }
-    void freeHer() {busy = false; }
+    void busyHer(){
+        lock_guard<mutex> guard(*girlMutex);
+        busy = true; }
+    void freeHer() {
+        lock_guard<mutex> guard(*girlMutex);
+        busy = false;
+    }
     Point getPosition(){ return *position; }
+    void setPosition(int x, int y){ position->setX(x); position->setY(y); }
     void drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position);
 
 };
