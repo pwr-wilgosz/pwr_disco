@@ -28,3 +28,29 @@ void Bar::draw(pthread_mutex_t* screenMutex){
     print(screenMutex, position->getX(), position->getY()+7, " ----         |  \\");
 
 }
+
+bool Bar::tryUse(bool action, int i){
+    lock_guard<mutex> guard(*barMutex[i]);
+    if (action == true){
+        //want to busy it
+        if (busy[i] == false){
+            //if wc is free, busy it
+            busy[i] = true;
+            return true;
+        }else{
+            //cannot busy locked toilette
+            return false;
+        }
+    }else{
+        //want to free it
+        if (busy[i] == true){
+            //if wc is free, busy it
+            busy[i] = false;
+            return true;
+        }else{
+            //cannot free empty toilette
+            return false;
+        }
+        
+    }
+}

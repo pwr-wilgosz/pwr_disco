@@ -69,7 +69,7 @@ void Boy::enjoy(){
                 }
                 //and to the girl
                 move(girl->getPosition());
-                if (!girl->isBusy()){
+                if (girl->ask(true)){
                     dance(girl);
                     girlIds.erase(iter);
                 }
@@ -86,14 +86,6 @@ void Boy::enjoy(){
 
 void Boy::dance(Girl *girl){
     Point p(position->getX(),position->getY());
-    if (!isInParquet()){
-        if (position->getX() < minPos->getX() || !isInParquet())
-            Point p(minPos->getX(),minPos->getY()+4);
-        else if (position->getX() > maxPos->getX() || !isInParquet())
-            Point p(maxPos->getX(),minPos->getY()+4);
-        move(p);
-    }
-    girl->busyHer();
     print(screenMutex, position->getX()+1, position->getY(), "=");
     
 
@@ -122,7 +114,7 @@ void Boy::dance(Girl *girl){
     clearChar(screenMutex, position->getX(), position->getY(), "   ");
     print(screenMutex, girl->getPosition().getX(), girl->getPosition().getY(), "G");
 
-    girl->freeHer();
+    girl->ask(false);
     
 }
 
@@ -200,16 +192,16 @@ void Boy::gotoWC(){
     p.setX(2);
     p.setY(wc->getPosition().getY()+6);
     move(p);
-    
-    if (!wc->isBusy()){
-        wc->busyIt();
+
+    //if can go to toilette
+    if (wc->tryUse(true)){
         //move in
         p.setY(wc->getPosition().getY()+2);
         move(p);
         print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), "!");
         usleep(rand()% 10000000 +100000);
         print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), " ");
-        wc->freeIt();
+        wc->tryUse(false);
         //move out
         p.setY(wc->getPosition().getY()+6);
         move(p);
@@ -239,14 +231,13 @@ void Boy::gotoBar(){
     move(p);
     
 
-    if (!bar->isBusy(whichBar)){
-        bar->busyIt(whichBar);
+    if (bar->tryUse(true, whichBar)){
         p.setX(bar->getPosition().getX()+3);
         move(p);
         print(screenMutex, bar->getPosition().getX()+3, bar->getPosition().getY()+8+whichBar, "!");
         usleep(rand()% 10000000 +100000);
         print(screenMutex, bar->getPosition().getX()+3, bar->getPosition().getY()+8+whichBar, " ");
-        bar->freeIt(whichBar);
+        bar->tryUse(false, whichBar);
         p.setX(bar->getPosition().getX()-3);
         move(p);
     }

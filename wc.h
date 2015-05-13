@@ -20,14 +20,7 @@ class Wc{
     mutex* wcMutex;
 public:
     Wc();
-    bool isBusy(){ return busy; }
-    void busyIt(){
-        lock_guard<mutex> guard(*wcMutex);
-        busy = true; }
-    void freeIt() {
-        lock_guard<mutex> guard(*wcMutex);
-        busy = false;
-    }
+    bool tryUse(bool action);
     Point getPosition(){ return *position; }
     void draw(pthread_mutex_t *screenMutex);
 

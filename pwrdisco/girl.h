@@ -27,14 +27,7 @@ public:
     Girl();
     Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex);
     int getId(){ return id; }
-    int isBusy(){ return busy; }
-    void busyHer(){
-        lock_guard<mutex> guard(*girlMutex);
-        busy = true; }
-    void freeHer() {
-        lock_guard<mutex> guard(*girlMutex);
-        busy = false;
-    }
+    bool ask(bool action);
     Point getPosition(){ return *position; }
     void setPosition(int x, int y){ position->setX(x); position->setY(y); }
     void drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point current_position);

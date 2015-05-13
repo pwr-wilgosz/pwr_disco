@@ -28,3 +28,29 @@ void Wc::draw(pthread_mutex_t* screenMutex){
     print(screenMutex, position->getX()+11, position->getY()+3, "___/");
     
 }
+
+bool Wc::tryUse(bool action){
+    lock_guard<mutex> guard(*wcMutex);
+    if (action == true){
+        //want to busy it
+        if (busy == false){
+            //if wc is free, busy it
+            busy = true;
+            return true;
+        }else{
+            //cannot busy locked toilette
+            return false;
+        }
+    }else{
+        //want to free it
+        if (busy == true){
+            //if wc is free, busy it
+            busy = false;
+            return true;
+        }else{
+            //cannot free empty toilette
+            return false;
+        }
+        
+    }
+}

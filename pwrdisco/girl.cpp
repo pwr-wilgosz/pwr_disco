@@ -34,3 +34,29 @@ void Girl::drawNewPosition(pthread_mutex_t *screenMutex, Parquet parquet, Point 
     print(screenMutex, current_position.getX(), current_position.getY(), "G");
     clearChar(screenMutex, position->getX(), position->getY(), " ");
 }
+
+bool Girl::ask(bool action){
+    lock_guard<mutex> guard(*girlMutex);
+    if (action == true){
+        //want to ask her to dance
+        if (busy == false){
+            //if she is free, ask her
+            busy = true;
+            return true;
+        }else{
+            //cannot busy if she already dance
+            return false;
+        }
+    }else{
+        //want to free her
+        if (busy == true){
+            //if she dance, free her
+            busy = false;
+            return true;
+        }else{
+            //if she doesn't dance, connot free ger
+            return false;
+        }
+        
+    }
+}

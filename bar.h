@@ -20,14 +20,7 @@ class Bar{
     mutex* barMutex[5];
 public:
     Bar();
-    bool isBusy(int i){ return busy[i]; }
-    void busyIt(int i){
-        lock_guard<mutex> guard(*barMutex[i]);
-        busy[i] = true; }
-    void freeIt(int i) {
-        lock_guard<mutex> guard(*barMutex[i]);
-        busy[i] = false;
-    }
+    bool tryUse(bool action, int i);
     Point getPosition(){ return *position; }
     void draw(pthread_mutex_t *screenMutex);
     
