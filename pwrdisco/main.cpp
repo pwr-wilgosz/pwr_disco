@@ -22,6 +22,8 @@ int main(int argc, const char * argv[]) {
     parquet.draw(&screenMutex);
     Wc *wc = new Wc();
     wc->draw(&screenMutex);
+    Bar *bar = new Bar();
+    bar->draw(&screenMutex);
 
     Girl* girls[GIRLS_COUNT];
     for (int i = 0; i < GIRLS_COUNT; i++)
@@ -35,7 +37,7 @@ int main(int argc, const char * argv[]) {
     Boy *boys[BOYS_COUNT];
     for(int i = 0; i < BOYS_COUNT; i++){
         // creating new threads in constructor
-        boys[i] = new Boy(parquet, &screenMutex, girls, i, wc);
+        boys[i] = new Boy(parquet, &screenMutex, girls, i, wc, bar);
     }
 
     for(int i = 0; i < BOYS_COUNT; i++){

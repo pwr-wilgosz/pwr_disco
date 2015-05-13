@@ -14,4 +14,5 @@
 #include "parquet.h"
 #include "boy.h"
 #include "wc.h"
+#include "bar.h"
 #endif /* defined(__pwrdisco__classes__) */

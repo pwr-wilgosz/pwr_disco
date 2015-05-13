@@ -25,6 +25,7 @@
 #define GIRLS_COUNT 100
 #define BOYS_COUNT 300
 
+
 #define xy(x, y) printf("\033[%d;%dH", x, y)
 
 using namespace std;

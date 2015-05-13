@@ -34,6 +34,8 @@ void Parquet::draw(pthread_mutex_t *screenMutex){
     
     print(screenMutex, top_left.getX(), top_left.getY()+5, " ");
     print(screenMutex, top_left.getX(), top_left.getY()+6, " ");
+    print(screenMutex, corners[1]->getX(), corners[1]->getY()+5, " ");
+    print(screenMutex, corners[1]->getX(), corners[1]->getY()+6, " ");
     
 
 }

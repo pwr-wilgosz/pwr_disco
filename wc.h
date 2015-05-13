@@ -10,9 +10,8 @@
 #define __pwrdisco__wc__
 
 #include <stdio.h>
-#include <stdio.h>
 #include "parquet.h"
-#include "mutex"
+#include <mutex>
 
 using namespace std;
 class Wc{

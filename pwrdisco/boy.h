@@ -14,6 +14,8 @@
 #include <cstddef>
 #include "headers.h"
 #include "wc.h"
+#include "parquet.h"
+#include "bar.h"
 using namespace std;
 
 class Boy{
@@ -23,14 +25,15 @@ class Boy{
     list<int> girlIds;
     thread _th;
     Girl **girls;
-    string actions[2] = {"dance", "wc"};
+    string actions[3] = {"dance", "wc", "bar"};
     int activeAction;
     pthread_mutex_t* screenMutex;
     Wc *wc;
-
+    Parquet *parquetCopy;
+    Bar *bar;
 public:
     Boy();
-    Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index, Wc* wwc);
+    Boy(Parquet parquet, pthread_mutex_t *screenMutex, Girl **, int index, Wc* wwc, Bar* myBar);
     ~Boy() { if (_th.joinable()) _th.join(); }
     
     Point getPosition(){ return *position; }
@@ -38,18 +41,17 @@ public:
     void startThread() { _th = thread(&Boy::enjoy, this); }
     void joinThread() { _th.join(); }
     void enjoy();
-    void chooseAction() { activeAction = rand() % 2; }
+    void chooseAction() { activeAction = rand() % 3; }
     string currentAction(){ return actions[activeAction];}
     void move(Point target);
     void gotoWC();
+    void gotoBar();
     void moveRight();
     void moveLeft();
     void moveUp();
     void moveDown();
-
+    bool isInParquet();
     void dance(Girl *girl);
-//    ask to dance
-//    dance
 };
 
 #endif /* defined(__pwrdisco__boy__) */

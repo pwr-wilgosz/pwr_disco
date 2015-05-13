@@ -14,9 +14,9 @@
 
 class Parquet {
     Point top_left;
-    Point *corners[4];
     int width, height;
 public:
+    Point *corners[4];
     Parquet();
     Parquet (Point top_left, int base_width, int base_height);
     void draw(pthread_mutex_t *screenMutex);
