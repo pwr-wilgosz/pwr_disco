@@ -23,8 +23,8 @@ Girl::Girl(int girl_id, Parquet parquet, pthread_mutex_t *screenMutex){
     id = girl_id;
     minPos = new Point(parquet.corner(0).getX()+6, parquet.corner(0).getY()+2);
     maxPos = new Point(parquet.corner(2).getX()-4, parquet.corner(2).getY()-2);
-//    position = new Point(maxPos->getX()-50, minPos->getY()+id);
-    position = new Point(maxPos->getX()-60-(id/(parquet.getHeight()-4)), minPos->getY() + 5 + id%(parquet.getHeight()-9));
+    int row = (id/(parquet.getHeight()-4))*spacebetweengirls;
+    position = new Point(maxPos->getX()-40-row, minPos->getY() + 7 + id%(parquet.getHeight()-15));
     girlMutex = new mutex;
 
     print(screenMutex, position->getX(), position->getY(), "G");

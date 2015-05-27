@@ -14,8 +14,7 @@
 
 #include "boy.h"
 #include "functions.h"
-#define movespeed rand() % 100000 + 50000
-#define dancespeed rand() % 1000000 + 100000
+#include "headers.h"
 Boy::Boy(){
     minPos = new Point();
     maxPos = new Point();
@@ -192,14 +191,14 @@ void Boy::gotoWC(){
     p.setX(2);
     p.setY(wc->getPosition().getY()+6);
     move(p);
-
+    
     //if can go to toilette
     if (wc->tryUse(true)){
         //move in
         p.setY(wc->getPosition().getY()+2);
         move(p);
         print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), "!");
-        usleep(rand()% 10000000 +100000);
+        usleep(shittingtime);
         print(screenMutex, wc->getPosition().getX(), wc->getPosition().getY(), " ");
         wc->tryUse(false);
         //move out
@@ -235,7 +234,7 @@ void Boy::gotoBar(){
         p.setX(bar->getPosition().getX()+3);
         move(p);
         print(screenMutex, bar->getPosition().getX()+3, bar->getPosition().getY()+8+whichBar, "!");
-        usleep(rand()% 10000000 +100000);
+        usleep(barservicetime);
         print(screenMutex, bar->getPosition().getX()+3, bar->getPosition().getY()+8+whichBar, " ");
         bar->tryUse(false, whichBar);
         p.setX(bar->getPosition().getX()-3);

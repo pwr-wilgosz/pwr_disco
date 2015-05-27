@@ -24,8 +24,11 @@
 
 #define GIRLS_COUNT 100
 #define BOYS_COUNT 300
-
-
+#define movespeed rand() % 100000 + 50000
+#define dancespeed rand() % 1000000 + 100000
+#define barservicetime rand()% 10000000 +100000
+#define shittingtime rand()% 10000000 +100000
+#define spacebetweengirls 15
 #define xy(x, y) printf("\033[%d;%dH", x, y)
 
 using namespace std;
